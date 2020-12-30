@@ -1,0 +1,28 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+
+    <body>
+
+        <ui:composition template="./../WEB-INF/resources/templates/chaptersTemplate.xhtml">
+
+            <ui:define name="content">
+                <h:form id="mainform">
+                    <h:panelGrid id="maintable" columns="2">
+                        <h:outputLabel id="simpleLabel1" value="A standard inputText component:" for="standardInput"/>
+                        <h:inputText id="standardInput"/>
+                        <p:outputLabel id="pfLabel2" value="A PrimeFaces inputText component:" for="pfInput"/>
+                        <p:inputText id="pfInput"/>
+                        <h:outputText id="currentThemeLabel" value="Current theme"/>
+                        <h:outputText id="currentThemeValue" value="#{initParam['primefaces.THEME']}"/>
+                    </h:panelGrid>
+                </h:form>
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

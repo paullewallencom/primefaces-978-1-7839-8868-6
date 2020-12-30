@@ -1,0 +1,67 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <f:view contentType="text/html" encoding="UTF-8">
+        <h:head>
+            <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+            <f:facet name="last">
+                <h:outputStylesheet library="css" name="default.css"/>
+            </f:facet>
+            <title><ui:insert name="title">Please add a proper title for this page!</ui:insert></title>
+            <ui:insert name="head" />
+        </h:head>
+
+        <h:body>
+            <h:form id="navForm">
+              <ui:insert name="menu">
+                <p:menubar id="navBar">
+                    <p:menuitem id="home" value="Home" url="/index.xhtml"/>
+                    <p:submenu id="chapter2" label="Chapter 2">
+                        <p:menuitem id="c2difference" value="Differences" url="/chapter2/difference.xhtml"/>
+                        <p:menuitem id="c2morecomponents" value="Mini Showcase" url="/chapter2/morecomponents.xhtml"/>
+                    </p:submenu>
+                    <p:submenu id="chapter4" label="Chapter 4">
+                        <p:menuitem id="c4index" value="Standard JSF inputText" url="/chapter4/index.xhtml"/>
+                        <p:menuitem id="c4andPFInput" value="Standard JSF vs PrimeFaces inputText" url="/chapter4/withPFEquivalent.xhtml"/>
+                        <p:menuitem id="c4standardWithPFTheme" value="Standard inputText with PrimeFaces theme" url="/chapter4/standardJSFWithPFTheme.xhtml"/>
+                    </p:submenu>
+                    <p:submenu id="chapter5" label="Chapter 5">
+                        <p:menuitem id="c5index" value="Let's get creative!" url="/chapter5/index.xhtml"/>
+                    </p:submenu>
+                    <p:submenu id="chapter6" label="Chapter 6">
+                    	<p:menuitem id="c6standardicons" value="Standard Icon Set" url="/chapter6/standardThemeIcons.xhtml"/>
+                    	<p:menuitem id="c6customicons" value="Custom Icons" url="/chapter6/addCustomThemeIcons.xhtml"/>
+                        <p:menuitem id="c6fontawesome" value="FontAwesome" url="/chapter6/fontawesome.xhtml"/>
+                    </p:submenu>
+                    <p:submenu id="chapter7" label="Chapter 7">
+                    	<p:menuitem id="c7schedulecomponent" value="Schedule component" url="/chapter7/scheduleComponent.xhtml"/>
+                    	<p:menuitem id="c7dynamicchangesclientside" value="Dynamic Changes clientside" url="/chapter7/dynamicChangesClientsidecall.xhtml"/>
+                    	<p:menuitem id="c7dynamicchangesserverside" value="Dynamic Changes serverside" url="/chapter7/dynamicChangesServersidecall.xhtml"/>
+                    </p:submenu>
+                    <p:submenu id="chapter8" label="Chapter 8">
+                    	<p:menuitem id="c8mobileindex" value="Hello mobile world" url="/chapter8/mobileindex.xhtml"/>
+                    	<p:menuitem id="c8primefacespage" value="PrimeFaces registration" url="/chapter8/primefacespage.xhtml"/>
+                    	<p:menuitem id="c8primefacesmobilepage" value="PrimeFaces mobile registration" url="/chapter8/primefacesmobilepage.xhtml"/>
+                    </p:submenu>
+                    <f:facet name="options">
+                        <p:outputLabel value="Current theme: #{currentTheme.theme} " for="themeSwitcher" style="vertical-align: 50%"/>
+                        <p:themeSwitcher id="themeSwitcher" effect="fade" value="#{currentTheme.theme}">
+                            <f:selectItem itemLabel="Choose Theme" itemValue="" itemDisabled="true"/>
+                            <f:selectItems value="#{themesService.themes}" var="theme" itemLabel="#{theme}" itemValue="#{theme}" itemLabelEscaped="true"/>
+                            <p:ajax update="@form"/>
+                        </p:themeSwitcher>
+                    </f:facet>
+                </p:menubar>
+              </ui:insert>
+            </h:form>
+            <p:panel id="content" style="text-align: center">
+                <ui:insert name="content">Content</ui:insert>
+            </p:panel>
+
+        </h:body>
+    </f:view>
+</html>

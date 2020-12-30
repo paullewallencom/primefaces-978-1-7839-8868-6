@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pm="http://primefaces.org/mobile"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
+
+<f:view renderKitId="PRIMEFACES_MOBILE" />
+
+<h:head>
+	<title><ui:insert name="title">Please add a proper title for this page!</ui:insert></title>
+	<ui:insert name="head" />
+</h:head>
+
+<h:body>
+
+	<pm:page>
+		<ui:insert name="header">
+			<pm:header
+				title="Header is container component for the top area of a page.">
+			</pm:header>
+		</ui:insert>
+
+		<ui:insert name="content">
+			<pm:content>
+             Content is container component for the content area of a page.
+		</pm:content>
+		</ui:insert>
+
+		<ui:insert name="footer">
+			<pm:footer fixed="true" tapToggle="false"
+				title="Footer is container component for the bottom area of a page.">
+			</pm:footer>
+		</ui:insert>
+
+	</pm:page>
+
+</h:body>
+
+</html>

@@ -1,0 +1,53 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+<body>
+
+	<ui:composition
+		template="./../WEB-INF/resources/templates/chaptersTemplate.xhtml">
+
+		<ui:define name="title">
+                Standard Icons
+        </ui:define>
+
+		<ui:define name="content">
+			<h:form id="mainForm">
+				<h:panelGrid columns="1">
+					<h:panelGroup style="margin-left:830px">
+						<h3 style="margin-top: 0">Buttons</h3>
+						<p:commandButton value="Edit" icon="ui-icon-pencil" type="button" />
+						<p:commandButton value="Bookmark" icon="ui-icon-bookmark"
+							type="button" />
+						<p:commandButton value="Next" icon="ui-icon-circle-arrow-e"
+							type="button" />
+						<p:commandButton value="Previous" icon="ui-icon-circle-arrow-w"
+							type="button" />
+					</h:panelGroup>
+					<h3>Menu</h3>
+					<p:menu style="margin-left:500px">
+						<p:submenu label="File">
+							<p:menuitem value="New" url="#" icon="ui-icon-plus" />
+							<p:menuitem value="Delete" url="#" icon="ui-icon-close" />
+							<p:menuitem value="Refresh" url="#" icon="ui-icon-refresh" />
+							<p:menuitem value="Print" url="#" icon="ui-icon-print" />
+						</p:submenu>
+						<p:submenu label="Navigations">
+							<p:menuitem value="Home" url="http://www.primefaces.org"
+								icon="ui-icon home" />
+							<p:menuitem value="Admin" url="#" icon="ui-icon-person" />
+							<p:menuitem value="Contact Us" url="#" icon="ui-icon-contact" />
+						</p:submenu>
+					</p:menu>
+				</h:panelGrid>
+			</h:form>
+		</ui:define>
+
+	</ui:composition>
+
+</body>
+</html>

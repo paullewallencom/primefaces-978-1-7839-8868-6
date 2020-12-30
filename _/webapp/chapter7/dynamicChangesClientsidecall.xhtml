@@ -1,0 +1,108 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+<ui:composition
+	template="./../WEB-INF/resources/templates/chaptersTemplate.xhtml">
+
+	<ui:define name="head">
+		<style type="text/css">
+		.scheduleDateBackground {
+			background: yellow !important;
+		}
+		.scheduleEventBackground {
+			background: green !important;
+		}
+		</style>
+		<script>
+		//<![CDATA[
+			function setSelectedDateBackground() {
+				var selecteddate = document.getElementById('mainForm:currentdate').value;
+				$('.scheduleDateBackground').removeClass(
+						'scheduleDateBackground');
+				$('td[data-date=' + selecteddate + ']').addClass(
+						'scheduleDateBackground');
+			}
+			
+			function setSelectedEventBackground() {
+				
+				var startdate = document.getElementById('mainForm:startdate').value;
+				var enddate = document.getElementById('mainForm:enddate').value;
+				$('.scheduleEventBackground').removeClass('scheduleEventBackground');
+				
+				var startdate = new Date(startdate);
+				var enddate = new Date(enddate);
+
+				 while (startdate <= enddate) {
+					var currentdate = startdate;
+					$('td[data-date=' + currentdate.toISOString().substr(0,10) + ']').addClass(
+							'scheduleEventBackground');
+					startdate.setDate(startdate.getDate() + 1);
+				} 
+				 
+			}
+			//]]>
+		</script>
+	</ui:define>
+
+	<ui:define name="title">
+                Dynamic Changes clientside
+        </ui:define>
+
+	<ui:define name="content">
+		<h:form id="mainForm">
+			<p:growl id="messages" showDetail="true" />
+			<h:inputHidden id="startdate" value="#{myScheduleView.startDate}"/>
+			<h:inputHidden id="enddate" value="#{myScheduleView.endDate}"/>
+			<h:inputHidden id="currentdate" value="#{myScheduleView.currentDate}"/>
+			
+			<p:schedule id="schedule"
+				value="#{myScheduleView.scheduleEventModel}" widgetVar="myschedule"
+				timeZone="GMT+2">
+
+				<p:ajax event="dateSelect"
+					listener="#{myScheduleView.onDateSelectForCurrentdate}" 
+					update="eventDetails,currentdate" oncomplete="setSelectedDateBackground();PF('eventDialog').show();" />
+				<p:ajax event="eventSelect" 
+					listener="#{myScheduleView.onEventSelectForDaterange}"
+					update="eventDetails,startdate,enddate" oncomplete="setSelectedEventBackground();PF('eventDialog').show();" />
+
+			</p:schedule>
+			<p:dialog widgetVar="eventDialog" header="Event Details"
+				showEffect="clip" hideEffect="clip">
+				<h:panelGrid id="eventDetails" columns="2">
+					<h:outputLabel for="title" value="Title:" />
+					<p:inputText id="title" value="#{myScheduleView.event.title}"
+						required="true" />
+
+					<h:outputLabel for="from" value="From:" />
+					<p:inputMask id="from" value="#{myScheduleView.event.startDate}"
+						mask="99/99/9999">
+						<f:convertDateTime pattern="dd/MM/yyyy" timeZone="GMT+2" />
+					</p:inputMask>
+
+					<h:outputLabel for="to" value="To:" />
+					<p:inputMask id="to" value="#{myScheduleView.event.endDate}"
+						mask="99/99/9999">
+						<f:convertDateTime pattern="dd/MM/yyyy" timeZone="GMT+2" />
+					</p:inputMask>
+
+					<h:outputLabel for="allDay" value="All Day:" />
+					<h:selectBooleanCheckbox id="allDay"
+						value="#{myScheduleView.event.allDay}" />
+
+					<p:commandButton type="reset" value="Reset" />
+					<p:commandButton id="addButton" value="Save"
+						actionListener="#{myScheduleView.addEvent}"
+						oncomplete="PF('myschedule').update();PF('eventDialog').hide();" />
+				</h:panelGrid>
+			</p:dialog>
+		</h:form>
+	</ui:define>
+
+</ui:composition>
+</html>

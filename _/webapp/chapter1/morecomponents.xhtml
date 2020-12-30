@@ -1,0 +1,24 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>PrimeFaces Themes Development Chapter 1</title>
+    </h:head>
+    <h:body>
+        <h:form id="mainForm">
+            <h:panelGrid columns="2">
+                <p:outputLabel value="PrimeFaces Input:"/><p:inputText/>
+                <p:outputLabel value="PrimeFaces Spinner"/><p:spinner/>
+                <p:outputLabel value="PrimeFaces Panel"/><p:panel header="An simple panel" toggleable="true" toggleTitle="Click to close/open">
+                    <p:commandButton value="Show dialog" onclick="PF('simpleDialog').show();" process="@this"/>
+                </p:panel>
+            </h:panelGrid>
+            <p:dialog id="dialog1" widgetVar="simpleDialog" modal="true">
+                <p:commandButton id="closeDialog" value="Close the dialog" onclick="PF('simpleDialog').hide();" process="@this"/>
+            </p:dialog>
+        </h:form>
+    </h:body>
+</html>
+
